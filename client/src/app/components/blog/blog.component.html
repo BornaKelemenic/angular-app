@@ -1,0 +1,98 @@
+<h1 class="jumbotron" style="text-align: center">
+  Blogs
+</h1>
+
+<button type="button" name="button" class="btn btn-primary" *ngIf="!newPost" (click)="newBlogForm()">New Post</button>
+<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="reloadBlogs()">Refresh</button>
+
+<!-- New blog form -->
+<form [formGroup]="form" name="blogForm" (submit)="onBlogSubmit()" *ngIf="newPost" novalidate>
+
+  <!-- Title -->
+  <div class="form-group">
+    <label for="title">Title</label>
+    <div [ngClass]="{ 'has-success': form.controls['title'].valid, 'has-error': form.controls['title'].dirty && form.controls['title'].errors }">
+      <input class="form-control" type="text" name="title" formControlName="title" placeholder="Title of the blog" autocomplete="off"
+        (input)="checkValidityOfNewBlog($event)">
+      <ul class="help-block">
+        <li *ngIf="form.controls['title'].dirty && form.controls['title'].errors?.required">This field is required.</li>
+        <li *ngIf="form.controls['title'].dirty && form.controls['title'].errors?.minlength">Minimal length is 5</li>
+        <li *ngIf="form.controls['title'].dirty && form.controls['title'].errors?.maxlength">Maximal length is 100</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="form-group">
+    <label for="text">Text</label>
+    <div [ngClass]="{ 'has-success': form.controls['text'].valid, 'has-error': form.controls['text'].dirty && form.controls['text'].errors }">
+      <textarea class="form-control" name="text" rows="8" placeholder="Text" formControlName="text" (input)="checkValidityOfNewBlog($event)"></textarea>
+      <ul class="help-block">
+        <li *ngIf="form.controls['text'].dirty && form.controls['text'].errors?.required">This field is required.</li>
+        <li *ngIf="form.controls['text'].dirty && form.controls['text'].errors?.minlength">Minimal length is 5</li>
+        <li *ngIf="form.controls['text'].dirty && form.controls['text'].errors?.maxlength">Maximal length is 500</li>
+      </ul>
+    </div>
+  </div>
+
+  <button [disabled]="processing" class="btn btn-warning" type="button" name="button" (click)="goBack()">Go Back</button>
+  <button [disabled]="processing || !form.valid || !newBlogValid" class="btn btn-success" type="submit" name="button">Submit</button>
+</form>
+<!-- End New blog form -->
+
+<br>
+<br>
+<div *ngIf="!newPost">
+  <div class="card card-primary" *ngFor="let blog of blogs" id="blogPost">
+    <div class="card-header">
+      <h3 class="card-title">{{ blog.title }}</h3>
+    </div>
+    <div class="card-body">
+      <pre>{{ blog.text }}</pre>
+    </div>
+    <div class="card-footer">
+      <strong>Posted by: </strong>{{ blog.author }}
+      <br>
+      <strong>Date: &nbsp;</strong>{{ blog.dateCreated | date: 'HH:mm - dd. MM. yyyy' }} &nbsp;
+      <span *ngIf="blog.dateEdited"><strong>Edited: </strong> {{ blog.dateEdited | date: 'HH:mm - dd. MM. yyyy' }}</span>
+      <br>
+
+      <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.author">
+        <button type="button" name="button" class="btn btn-sm btn-info">Edit</button>
+      </a>
+      <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.author">
+        <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
+      </a>
+
+      <!-- Likes dropdown -->
+      <div class="dropdown">
+        <button [disabled]="blog.likedBy.indexOf(username) > -1" type="button" name="button" class="btn btn-sm btn-success" (click)="likeBlog(blog._id)">Likes {{ blog.likes }}</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/user/', liker]" *ngFor="let liker of blog.likedBy">{{ liker }}</a>
+        </div>
+      </div>
+
+      <!-- Dislikes dropdown -->
+      <div class="dropdown">
+        <button [disabled]="blog.dislikedBy.indexOf(username) > -1" type="button" name="button" class="btn btn-sm btn-danger" (click)="dislikeBlog(blog._id)">Dislikes {{ blog.dislikes }}</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/user/', disliker]" *ngFor="let disliker of blog.dislikedBy">{{ disliker }}</a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <button type="button" name="button" class="btn btn-sm btn-primary" (click)="draftComment()">Post comment</button>
+        <br>
+        <!-- Comment form -->
+        <!--
+        <form [formGroup]="" novalidate>
+          <textarea name="comment" cols="30" rows="10" class="form-control"></textarea>
+          <button type="button" name="button" class="btn btn-sm btn-info">Submit</button>
+          <button type="button" name="button" class="btn btn-sm btn-danger">Cancel</button>
+        </form> -->
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="jumbotron">
+  <h1>Profile page</h1>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item">Username:
+    <strong>{{ user.username }}</strong>
+  </li>
+  <li class="list-group-item">E-mail:
+    <strong>{{ user.email }}</strong>
+  </li>
+  <li class="list-group-item">Role:
+    <strong>{{ user.role | uppercase }}</strong>
+  </li>
+</ul>
+
+<br>
+<div class="d-flex justify-content-center">
+  <button *ngIf="!showBlogs" (click)="getBlogs()" [disabled]="processing" type="button" class="btn btn-success">Show my blogs</button>
+  <button *ngIf="showBlogs" (click)="hideBlogs()" [disabled]="processing" type="button" class="btn btn-warning">Hide my blogs</button>
+</div>
+<br>
+<div *ngIf="showBlogs">
+  <div class="card card-primary" *ngFor="let blog of blogs">
+    <div class="card-header">
+      <h3 class="card-title">{{ blog.title }}</h3>
+    </div>
+    <div class="card-body">
+      <pre>{{ blog.text }}</pre>
+    </div>
+    <div class="card-footer">
+      <strong>Posted by: </strong>{{ blog.author }}
+      <br>
+      <strong>Date: &nbsp;</strong>{{ blog.dateCreated | date: 'HH:mm - dd. MM. yyyy' }} &nbsp;
+      <span *ngIf="blog.dateEdited">
+        <strong>Edited: </strong> {{ blog.dateEdited | date: 'HH:mm - dd. MM. yyyy' }}</span>
+
+      <br>
+
+      <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="user.username === blog.author">
+        <button type="button" name="button" class="btn btn-sm btn-info">Edit</button>
+      </a>
+      <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="user.username === blog.author">
+        <button type="button" name="button" class="btn btn-sm btn-danger">Delete</button>
+      </a>
+
+      <!-- Likes dropdown -->
+      <div class="dropdown">
+        <button [disabled]="blog.likedBy.indexOf(user.username) > -1" type="button" name="button" class="btn btn-sm btn-success"
+          (click)="likeBlog(blog._id)">Likes {{ blog.likes }}</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/user/', liker]" *ngFor="let liker of blog.likedBy">{{ liker }}</a>
+        </div>
+      </div>
+
+      <!-- Dislikes dropdown -->
+      <div class="dropdown">
+        <button [disabled]="blog.dislikedBy.indexOf(user.username) > -1" type="button" name="button" class="btn btn-sm btn-danger"
+          (click)="dislikeBlog(blog._id)">Dislikes {{ blog.dislikes }}</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['/user/', disliker]" *ngFor="let disliker of blog.dislikedBy">{{ disliker }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

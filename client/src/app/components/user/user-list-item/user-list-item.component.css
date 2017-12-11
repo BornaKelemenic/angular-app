@@ -1,0 +1,9 @@
+.listItem
+{
+    transition: .25s;
+}
+
+.listItem:hover
+{
+    background-color: #e9e9e9;
+}

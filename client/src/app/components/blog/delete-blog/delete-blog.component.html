@@ -1,0 +1,38 @@
+<h1 class="jumbotron" style="text-align: center">
+  Delete blog
+</h1>
+
+<div class="d-flex justify-content-center" *ngIf="foundBlog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        Confirm
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <p>Are you sure you want to delete this blog ?</p>
+    </div>
+
+    <div class="modal-footer">
+      <button [disabled]="processing" type="button" class="btn btn-success" (click)="deleteBlog()">YES</button>
+      <button [disabled]="processing" type="button" class="btn btn-danger" (click)="goBack()">NO</button>
+    </div>
+
+    <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">{{ blog.title }}</h3>
+        </div>
+        <div class="card-body">
+          <pre>{{ blog.text }}</pre>
+        </div>
+        <div class="card-footer">
+          <strong>Posted by: </strong>{{ blog.author }}
+          <br>
+          <strong>Date: &nbsp;</strong>{{ blog.dateCreated | date: 'HH:mm - dd. MM. yyyy' }} &nbsp;
+          <span *ngIf="blog.dateEdited">
+            <strong>Edited: </strong> {{ blog.dateEdited | date: 'HH:mm - dd. MM. yyyy' }}</span>
+        </div>
+      </div>
+  </div>
+</div>

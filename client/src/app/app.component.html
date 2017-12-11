@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+
+<div class="myMsgService" *ngIf="msgService.message">
+  <div [ngClass]="msgService.messageClass">
+    {{ msgService.message }}
+  </div>
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

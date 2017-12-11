@@ -1,0 +1,18 @@
+.myMsgService
+{
+    position: fixed;
+    bottom: 0px;
+    left: 50vw;
+    transform: translateX(-50%);
+    margin: 0 auto;
+    width: 20vw;
+    z-index: 1000;
+}
+
+@media screen and (max-width: 720px) 
+{
+    .myMsgService
+    {
+        width: 90vw;
+    }
+}
