@@ -44,5 +44,32 @@ module.exports = (router) =>
         }
     });
 
+    // Route for getting user's contacts
+    router.get('/my', (req, res) => 
+    {
+        if (!req.decoded.userId && !req.decoded.username)
+        {
+            res.json({ success: false, msg: 'Can\'t get user\'s info from token because it was not provided.' });
+        }
+        else
+        {
+            Contact.find({ addedBy: req.decoded.username }).exec((err, contacts) => 
+            {
+                if (err)
+                {
+                    res.json({ success: false, msg: err });
+                }
+                else if (!contacts)
+                {
+                    res.json({ success: false, msg: 'No contacts found.' });
+                }
+                else
+                {
+                    res.json({ success: true, msg: 'Found contacts.', contacts: contacts });
+                }
+            });
+        }
+    });
+
     return router;
 }
