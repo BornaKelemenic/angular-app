@@ -4,12 +4,19 @@
   <thead class="thead-dark">
     <tr>
       <th>#</th>
-      <th>Ime</th>
-      <th>Prezime</th>
-      <th>Grad</th>
-      <th>Svi Telefoni</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>City</th>
+      <th>All numbers</th>
     </tr>
   </thead>
   <tbody>
+    <tr *ngFor="let kontakt of contacts; let i=index">
+      <td>{{ i+1 }}</td>
+      <td>{{ kontakt.name }}</td>
+      <td>{{ kontakt.surname }}</td>
+      <td>{{ kontakt.city }}</td>
+      <td>{{ (kontakt.mobile_numbers | json) || 'No numbers' }}</td>
+    </tr>
   </tbody>
 </table>
