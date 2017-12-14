@@ -26,6 +26,7 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { ContactsTableComponent } from './components/contacts/contacts-table/contacts-table.component';
 import { ContactsService } from './services/contacts.service';
 import { DataTablesModule } from 'angular-datatables';
+import { ContactFormComponent } from './components/contacts/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { DataTablesModule } from 'angular-datatables';
     UserListComponent,
     UserListItemComponent,
     UserEditComponent,
-    ContactsTableComponent
+    ContactsTableComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ export class ContactsTableComponent implements OnInit
   contacts;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  isContactFormEnabled = false;
 
   constructor(
     public msgService: MessageService,
@@ -79,5 +80,11 @@ export class ContactsTableComponent implements OnInit
     {
       return array.map(br => br.number).join(', ');
     }    
+  }
+
+
+  addNewContact()
+  {
+    this.isContactFormEnabled = !this.isContactFormEnabled;
   }
 }

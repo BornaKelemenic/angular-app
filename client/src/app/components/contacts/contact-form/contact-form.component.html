@@ -1,0 +1,28 @@
+<form [formGroup]="form" name="contactForm" (submit)="saveContact()" novalidate>
+
+  <!-- Name -->
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <div [ngClass]="{ 'has-success': form.controls['name'].valid, 'has-error': form.controls['name'].dirty && form.controls['name'].errors }">
+      <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name" autocomplete="off">
+      <ul class="help-block">
+        <li *ngIf="form.controls['name'].dirty && form.controls['name'].errors?.required">This field is required.</li>
+        <li *ngIf="form.controls['name'].dirty && form.controls['name'].errors?.minlength">Minimal length is 1</li>
+        <li *ngIf="form.controls['name'].dirty && form.controls['name'].errors?.maxlength">Maximal length is 100</li>
+      </ul>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="surname">Surname:</label>
+    <div [ngClass]="{ 'has-success': form.controls['surname'].valid, 'has-error': form.controls['surname'].dirty && form.controls['surname'].errors }">
+      <input class="form-control" type="text" name="surname" formControlname="surname" placeholder="Surname" autocomplete="off">
+      <ul class="help-block">
+        <li *ngIf="form.controls['surname'].dirty && form.controls['surname'].errors?.required">This field is required.</li>
+        <li *ngIf="form.controls['surname'].dirty && form.controls['surname'].errors?.minlength">Minimal length is 1</li>
+        <li *ngIf="form.controls['surname'].dirty && form.controls['surname'].errors?.maxlength">Maximal length is 100</li>
+      </ul>
+    </div>
+  </div>
+</form>
+<br>
+<br>
