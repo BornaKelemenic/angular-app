@@ -7,7 +7,7 @@ import { ContactsService } from '../../../services/contacts.service';
   templateUrl: './contacts-table.component.html',
   styleUrls: ['./contacts-table.component.css']
 })
-export class ContactsTableComponent implements OnInit 
+export class ContactsTableComponent implements OnInit
 {
   contacts;
 
@@ -36,5 +36,4 @@ export class ContactsTableComponent implements OnInit
       }
     });
   }
-
 }
