@@ -35,10 +35,4 @@ export class MessageService
     this.message = null;
     this.messageClass = null;
   }
-
-  public hideMsg()
-  {
-    this.removeInfoMessages();
-  }
-
 }

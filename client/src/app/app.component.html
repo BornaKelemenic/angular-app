@@ -3,7 +3,7 @@
 <div class="myMsgService" *ngIf="msgService.message">
   <div [ngClass]="msgService.messageClass">
     {{ msgService.message }}
-    <span class="float-right" (click)="msgService.hideMsg()" style="cursor: pointer">
+    <span class="float-right" (click)="msgService.removeInfoMessages()" style="cursor: pointer">
       X
     </span>
   </div>
