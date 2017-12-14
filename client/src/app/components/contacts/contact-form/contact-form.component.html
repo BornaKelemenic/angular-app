@@ -15,7 +15,7 @@
   <div class="form-group">
     <label for="surname">Surname:</label>
     <div [ngClass]="{ 'has-success': form.controls['surname'].valid, 'has-error': form.controls['surname'].dirty && form.controls['surname'].errors }">
-      <input class="form-control" type="text" name="surname" formControlname="surname" placeholder="Surname" autocomplete="off">
+      <input class="form-control" type="text" name="surname" formControlName="surname" placeholder="Surname" autocomplete="off">
       <ul class="help-block">
         <li *ngIf="form.controls['surname'].dirty && form.controls['surname'].errors?.required">This field is required.</li>
         <li *ngIf="form.controls['surname'].dirty && form.controls['surname'].errors?.minlength">Minimal length is 1</li>
