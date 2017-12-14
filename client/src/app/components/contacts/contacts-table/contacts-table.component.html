@@ -14,7 +14,7 @@
       <td>{{ kontakt.name }}</td>
       <td>{{ kontakt.surname }}</td>
       <td>{{ kontakt.city }}</td>
-      <td>{{ (kontakt.mobile_numbers | json) || 'No numbers' }}</td>
+      <td>{{ (getAllNumbers(kontakt.mobile_numbers)) || 'No numbers' }}</td>
     </tr>
   </tbody>
 </table>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../../services/message.service';
 import { ContactsService } from '../../../services/contacts.service';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-contacts-table',
@@ -62,5 +63,21 @@ export class ContactsTableComponent implements OnInit
         }, 2000);
       }
     });
+  }
+
+  /**
+   * Convert an array of objects to display just one field
+   * @param array 
+   */
+  getAllNumbers(array)
+  {
+    if (array.length < 1)
+    {
+      return undefined;
+    }
+    else
+    {
+      return array.map(br => br.number).join(', ');
+    }    
   }
 }
