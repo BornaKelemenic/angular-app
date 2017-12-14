@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/dist/'));
 app.use('/auth', authRouter);
 app.use('/blog', blogRouter);
-app.use('/contact', contactRouter);
+app.use('/contacts', contactRouter);
 
 
 // Return index.html file to the user

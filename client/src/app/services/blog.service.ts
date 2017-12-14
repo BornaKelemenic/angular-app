@@ -22,7 +22,7 @@ export class BlogService
         'authorization': this.authService.authToken
       })
     });
-  }
+  }  
 
   /**
    * Save a new blog to the database

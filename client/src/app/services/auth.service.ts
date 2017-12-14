@@ -28,6 +28,15 @@ export class AuthService
     });
   }
 
+  /**
+   * Returns options for headers
+   */
+  getAuthHeaders()
+  {
+    this.createAuthHeaders();
+    return this.options;
+  }
+
   loadToken()
   {
     this.authToken = localStorage.getItem('token');

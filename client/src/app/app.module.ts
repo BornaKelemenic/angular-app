@@ -23,6 +23,8 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { UserListItemComponent } from './components/user/user-list-item/user-list-item.component';
 import { UserRoleGuard } from './guards/user-role.guard';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { ContactsTableComponent } from './components/contacts/contacts-table/contacts-table.component';
+import { ContactsService } from './services/contacts.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
     PublicProfileComponent,
     UserListComponent,
     UserListItemComponent,
-    UserEditComponent
+    UserEditComponent,
+    ContactsTableComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, MessageService, UserRoleGuard],
+  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, MessageService, UserRoleGuard, ContactsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
