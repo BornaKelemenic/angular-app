@@ -25,6 +25,7 @@ import { UserRoleGuard } from './guards/user-role.guard';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { ContactsTableComponent } from './components/contacts/contacts-table/contacts-table.component';
 import { ContactsService } from './services/contacts.service';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ContactsService } from './services/contacts.service';
     HttpModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, MessageService, UserRoleGuard, ContactsService],
   bootstrap: [AppComponent]
