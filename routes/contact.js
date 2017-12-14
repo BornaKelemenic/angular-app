@@ -25,7 +25,7 @@ module.exports = (router) =>
             const newContact = new Contact({
                 name: req.body.name,
                 surname: req.body.surname,
-                city: req.body.city,
+                city: req.body.city ? req.body.city : undefined,
                 desc: req.body.desc,
                 addedBy: req.decoded.username,
                 mobile_numbers: req.body.mobile_numbers
