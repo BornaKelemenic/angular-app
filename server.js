@@ -7,6 +7,7 @@ const mongoose   = require('mongoose');
 const config     = require('./config/database');
 const authRouter = require('./routes/auth')(router);
 const blogRouter = require('./routes/blog')(router);
+const contactRouter = require('./routes/contact')(router);
 const bodyParser = require('body-parser');
 const cors       = require('cors');
 const morgan     = require('morgan');
@@ -38,6 +39,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/dist/'));
 app.use('/auth', authRouter);
 app.use('/blog', blogRouter);
+app.use('/contact', contactRouter);
 
 
 // Return index.html file to the user
