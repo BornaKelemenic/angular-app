@@ -29,4 +29,14 @@ export class ContactsService
     this.options = this.authService.getAuthHeaders();
     return this.http.post(this.authService.domain + '/contacts/save', contact, this.options).map(res => res.json());
   }
+
+  /**
+   * Get the contact by provided id
+   * @param id 
+   */
+  getContactById(id)
+  {
+    this.options = this.authService.getAuthHeaders();
+    return this.http.get(this.authService.domain + '/contacts/' + id, this.options).map(res => res.json());
+  }
 }

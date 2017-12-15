@@ -28,7 +28,8 @@ module.exports = (router) =>
                 city: req.body.city ? req.body.city : undefined,
                 desc: req.body.desc,
                 addedBy: req.decoded.username,
-                mobile_numbers: req.body.mobile_numbers
+                mobile_numbers: req.body.mobile_numbers,
+                picture: req.body.picture
             });
 
             newContact.save(err => {
@@ -68,6 +69,32 @@ module.exports = (router) =>
                     res.json({ success: true, msg: 'Found contacts.', contacts: contacts });
                 }
             });
+        }
+    });
+
+    router.get('/:id', (req, res) => 
+    {
+        if (!req.params.id)
+        {
+            res.json({ success: false, msg: 'ID was not provided.' });
+        }
+        else
+        {
+            Contact.findOne({ _id:req.params.id }, (err, contact) => 
+            {
+                if (err)
+                {
+                    res.json({ success: false, msg: err });
+                }
+                else if (!contact)
+                {
+                    res.json({ success: false, msg: 'Requested contact not found.' });
+                }
+                else
+                {
+                    res.json({ success: true, msg: 'Found contact.', contact: contact });
+                }
+            })
         }
     });
 

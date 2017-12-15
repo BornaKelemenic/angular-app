@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 export class ContactsTableComponent implements OnInit
 {
   contacts;
+  selectedContact;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   isContactFormEnabled = false;
@@ -34,6 +35,7 @@ export class ContactsTableComponent implements OnInit
         $('td', row).unbind('click');
         $('td', row).bind('click', () => {
           // Click handler
+          this.rowClick(data);
         });
         return row;
       }
@@ -82,9 +84,26 @@ export class ContactsTableComponent implements OnInit
     }    
   }
 
-
   addNewContact()
   {
     this.isContactFormEnabled = !this.isContactFormEnabled;
+  }
+
+  rowClick(data)
+  {
+    this.contactService.getContactById(data[0]).subscribe(res => 
+    {
+      if (!res.success)
+      {
+        this.msgService.createErrorMessage(res.msg);
+      }
+      else
+      {
+        // this.msgService.createSuccessMessage(res.msg);
+        this.msgService.removeInfoMessages();
+        console.log(res.contact);
+        this.selectedContact = res.contact;
+      }
+    });
   }
 }

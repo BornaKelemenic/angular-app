@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { MessageService } from '../../../services/message.service';
 import { ContactsService } from '../../../services/contacts.service';
 
@@ -12,6 +12,7 @@ export class ContactFormComponent implements OnInit
 {
   form;
   processing = false;
+  num_types = ['Mobile', 'Home', 'Work'];
 
   constructor(
     public msgService: MessageService,
@@ -41,7 +42,13 @@ export class ContactFormComponent implements OnInit
         this.isEmptyString
       ])],
       desc: ['', Validators.maxLength(100)],
-      city: ['', Validators.maxLength(100)]
+      city: ['', Validators.maxLength(100)],
+      picture: [''],
+      mobile_numbers: this.formBuilder.array([ new FormGroup({
+        number: new FormControl(''),
+        type: new FormControl(''),
+        desc: new FormControl('')
+      })])
     });
   }
 
@@ -79,8 +86,11 @@ export class ContactFormComponent implements OnInit
       name: this.form.get('name').value,
       surname: this.form.get('surname').value,
       city: this.form.get('city').value,
-      desc: this.form.get('desc').value
-    };
+      desc: this.form.get('desc').value,
+      picture: this.form.get('picture').value,
+      mobile_numbers: this.form.get('mobile_numbers').value
+    };    
+
 
     this.contactService.saveNewContact(newContact).subscribe(res => 
     {
@@ -101,4 +111,17 @@ export class ContactFormComponent implements OnInit
 
   }
 
+  addNewNumber()
+  {
+    (<FormArray>this.form.get('mobile_numbers')).push(new FormGroup({
+      number: new FormControl(''),
+      type: new FormControl(''),
+      desc: new FormControl('')
+    }));
+  }
+
+  removeNumber(num: number)
+  {
+    (<FormArray>this.form.get('mobile_numbers')).removeAt(num);
+  }
 }

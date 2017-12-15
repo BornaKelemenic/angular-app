@@ -27,6 +27,7 @@ import { ContactsTableComponent } from './components/contacts/contacts-table/con
 import { ContactsService } from './services/contacts.service';
 import { DataTablesModule } from 'angular-datatables';
 import { ContactFormComponent } from './components/contacts/contact-form/contact-form.component';
+import { ContactDetailComponent } from './components/contacts/contact-detail/contact-detail.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ContactFormComponent } from './components/contacts/contact-form/contact
     UserListItemComponent,
     UserEditComponent,
     ContactsTableComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    ContactDetailComponent
   ],
   imports: [
     BrowserModule,

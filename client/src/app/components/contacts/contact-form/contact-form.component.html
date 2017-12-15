@@ -27,7 +27,7 @@
       </ul>
     </div>
   </div>
-  
+
   <!-- City -->
   <div class="form-group">
     <label for="city">City:</label>
@@ -47,6 +47,47 @@
       <ul class="help-block">
         <li *ngIf="form.controls['desc'].dirty && form.controls['desc'].errors?.maxlength">Maximal length is 100</li>
       </ul>
+    </div>
+  </div>
+
+  <!-- Picture -->
+  <div class="form-group">
+    <label for="picture">Picture link:</label>
+    <div>
+      <input class="form-control" type="text" name="picture" formControlName="picture" placeholder="Link to the picture" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Numbers -->
+  <div class="form-group">
+    <label for="numbers">Telephone numbers:</label>
+    <ul class="list-group" formArrayName="mobile_numbers">
+      <div class="list-group-item" *ngFor="let num of form.controls['mobile_numbers'].controls; let i=index">
+        <div formGroupName="{{ i }}" class="d-flex justify-content-around align-items-center">
+          <div>
+            Type:
+            <br>
+            <select formControlName="type" class="custom-select">
+              <option [ngValue]="null" disabled>Choose a type</option>
+              <option *ngFor="let ty of num_types" value="{{ ty }}" selected>{{ ty }}</option>
+            </select>
+          </div>
+          <div>
+            Number:
+            <input type="text" class="form-control" formControlName="number">
+          </div>
+          <div>
+            Description:
+            <input type="text" class="form-control" formControlName="desc">
+          </div>
+          <div>
+            <button type="button" class="btn btn-sm btn-danger" (click)="removeNumber(i)">X</button>
+          </div>
+        </div>
+      </div>
+    </ul>
+    <div>
+      <button class="btn btn-success" type="button" (click)="addNewNumber()">+</button>
     </div>
   </div>
 

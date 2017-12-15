@@ -1,0 +1,17 @@
+<table class="table table-striped table-responsive-sm">
+  <tr>
+    <td>Name: {{ contact?.name }}</td>
+    <td colspan="3" rowspan="3">
+      <img width="300px" height="300px" [src]="contact?.picture" (error)="this.contact.picture = 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'" alt="Picture">
+    </td>
+  </tr>
+  <tr>
+    <td>Surname: {{ contact?.surname }}</td>
+  </tr>
+  <tr>
+    <td>City: {{ contact?.city }}</td>
+  </tr>
+  <tr>
+    <td>Description: {{ contact?.desc }}</td>
+  </tr>
+</table>
