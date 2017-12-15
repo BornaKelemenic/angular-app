@@ -1,17 +1,29 @@
-<table class="table table-striped table-responsive-sm">
-  <tr>
-    <td>Name: {{ contact?.name }}</td>
-    <td colspan="3" rowspan="3">
-      <img width="300px" height="300px" [src]="contact?.picture" (error)="this.contact.picture = 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'" alt="Picture">
-    </td>
-  </tr>
-  <tr>
-    <td>Surname: {{ contact?.surname }}</td>
-  </tr>
-  <tr>
-    <td>City: {{ contact?.city }}</td>
-  </tr>
-  <tr>
-    <td>Description: {{ contact?.desc }}</td>
-  </tr>
-</table>
+<!--Card-->
+<div class="card testimonial-card" style="width: 50%; margin: 0 auto;">
+  <!--Bacground color-->
+  <div class="card-up indigo lighten-1">
+  </div>
+  <!--Avatar-->
+  <div class="avatar">
+    <img class="rounded-circle" [src]="contact?.picture" (error)="contact.picture = 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'"
+      alt="Picture">
+  </div>
+  <div class="card-body">
+    <!--Name-->
+    <h4 class="card-title">{{ contact?.name }} {{ contact?.surname }}</h4>
+    <hr>
+    <h6 class="card-text">{{ contact?.city }}</h6>
+    <hr>
+    <!--Quotation-->
+    <p>
+      <i class="fa fa-quote-left"></i>{{ contact?.desc }}
+    </p>
+
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let num of contact?.mobile_numbers">
+        <strong>{{ num.type | uppercase }}:</strong>
+        {{ num.number }} | {{ num.desc }}
+      </li>
+    </ul>
+  </div>
+</div>
