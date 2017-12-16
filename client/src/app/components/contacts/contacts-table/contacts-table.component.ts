@@ -35,7 +35,18 @@ export class ContactsTableComponent implements OnInit
         $('td', row).unbind('click');
         $('td', row).bind('click', () => {
           // Click handler
-          this.rowClick(data);
+          if (this.selectedContact)
+          {
+            if (this.selectedContact._id !== data[0])
+            {
+              this.rowClick(data);
+            }
+          }
+          else
+          {
+            this.rowClick(data);
+          }
+          
         });
         return row;
       }
