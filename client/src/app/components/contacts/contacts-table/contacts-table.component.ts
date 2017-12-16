@@ -99,9 +99,7 @@ export class ContactsTableComponent implements OnInit
       }
       else
       {
-        // this.msgService.createSuccessMessage(res.msg);
         this.msgService.removeInfoMessages();
-        console.log(res.contact);
         this.selectedContact = res.contact;
       }
     });

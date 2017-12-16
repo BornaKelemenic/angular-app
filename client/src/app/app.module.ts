@@ -28,6 +28,8 @@ import { ContactsService } from './services/contacts.service';
 import { DataTablesModule } from 'angular-datatables';
 import { ContactFormComponent } from './components/contacts/contact-form/contact-form.component';
 import { ContactDetailComponent } from './components/contacts/contact-detail/contact-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModules } from './material-modules';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { ContactDetailComponent } from './components/contacts/contact-detail/con
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    MaterialModules
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, MessageService, UserRoleGuard, ContactsService],
   bootstrap: [AppComponent]

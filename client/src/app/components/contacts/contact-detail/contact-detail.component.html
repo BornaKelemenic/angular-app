@@ -1,29 +1,25 @@
-<!--Card-->
-<div class="card testimonial-card" style="width: 50%; margin: 0 auto;">
-  <!--Bacground color-->
-  <div class="card-up indigo lighten-1">
-  </div>
-  <!--Avatar-->
-  <div class="avatar">
-    <img class="rounded-circle" [src]="contact?.picture" (error)="contact.picture = 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'"
-      alt="Picture">
-  </div>
-  <div class="card-body">
-    <!--Name-->
-    <h4 class="card-title">{{ contact?.name }} {{ contact?.surname }}</h4>
-    <hr>
-    <h6 class="card-text">{{ contact?.city }}</h6>
-    <hr>
-    <!--Quotation-->
-    <p>
-      <i class="fa fa-quote-left"></i>{{ contact?.desc }}
-    </p>
-
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let num of contact?.mobile_numbers">
-        <strong>{{ num.type | uppercase }}:</strong>
-        {{ num.number }} | {{ num.desc }}
-      </li>
-    </ul>
-  </div>
-</div>
+<mat-card>
+  <mat-card-header>
+    <img matCardAvatar src="{{ contact?.picture }}" (error)="contact.picture = 'https://cdn1.iconfinder.com/data/icons/image-manipulations/100/13-512.png'">
+    <mat-card-title>{{ contact?.name }} {{ contact?.surname}}</mat-card-title>
+    <mat-card-subtitle>{{ contact?.city }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    {{ contact?.desc }}
+  </mat-card-content>
+  <mat-card-actions align="start">
+    <button mat-button color="primary">EDIT</button>
+    <button mat-button color="warn">DELETE</button>
+  </mat-card-actions>
+  <mat-divider></mat-divider>
+  <mat-card-footer>
+    <mat-list *ngIf="!(contact.mobile_numbers.length < 1)">
+      <h3 mat-subheader>Numbers</h3>      
+      <mat-list-item *ngFor="let num of contact?.mobile_numbers">
+        <mat-icon mat-list-icon>smartphone</mat-icon>
+        <h4 mat-line>{{ num.type | uppercase }}</h4>
+        <p mat-line>{{ num.number }} -- {{ num.desc }}</p>        
+      </mat-list-item>
+    </mat-list>
+  </mat-card-footer>
+</mat-card>

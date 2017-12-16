@@ -64,24 +64,25 @@
     <ul class="list-group" formArrayName="mobile_numbers">
       <div class="list-group-item" *ngFor="let num of form.controls['mobile_numbers'].controls; let i=index">
         <div formGroupName="{{ i }}" class="d-flex justify-content-around align-items-center">
+
+          <mat-form-field>
+            <mat-select placeholder="Type of the number" formControlName="type">
+              <mat-option *ngFor="let ty of num_types" [value]="ty">
+                {{ ty }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput type="number" placeholder="Number" formControlName="number">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput type="text" placeholder="Description" formControlName="desc">
+          </mat-form-field>
+
           <div>
-            Type:
-            <br>
-            <select formControlName="type" class="custom-select">
-              <option [ngValue]="null" disabled>Choose a type</option>
-              <option *ngFor="let ty of num_types" value="{{ ty }}" selected>{{ ty }}</option>
-            </select>
-          </div>
-          <div>
-            Number:
-            <input type="text" class="form-control" formControlName="number">
-          </div>
-          <div>
-            Description:
-            <input type="text" class="form-control" formControlName="desc">
-          </div>
-          <div>
-            <button type="button" class="btn btn-sm btn-danger" (click)="removeNumber(i)">X</button>
+            <button type="button" mat-mini-fab color="warn" (click)="removeNumber(i)">X</button>
           </div>
         </div>
       </div>
