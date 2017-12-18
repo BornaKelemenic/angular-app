@@ -22,14 +22,9 @@ export class ContactDetailComponent implements OnInit
     if (!this.contact)
     {
       this.contact = {
-        _id: null,
         name: 'Error',
         surname: 'Error',
-        city: 'Error',
-        addedBy: null,
-        desc: 'Error',
-        picture: null,
-        mobile_numbers: null
+        city: 'Error'
       };
     }
   }

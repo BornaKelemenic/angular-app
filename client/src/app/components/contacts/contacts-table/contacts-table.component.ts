@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { MessageService } from '../../../services/message.service';
 import { ContactsService } from '../../../services/contacts.service';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import { Contact } from '../../../models/Contact';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-contacts-table',
   templateUrl: './contacts-table.component.html',
   styleUrls: ['./contacts-table.component.css']
 })
-export class ContactsTableComponent implements OnInit
+export class ContactsTableComponent implements OnInit, AfterViewInit
 {  
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();  
+  dtTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
 
   constructor(
     public msgService: MessageService,
@@ -51,6 +53,20 @@ export class ContactsTableComponent implements OnInit
     };
 
     this.getContacts();
+  }
+
+  ngAfterViewInit()
+  {
+    this.dtTrigger.next();
+  }
+  rerender(): void 
+  {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
+    });
   }
 
   /**
