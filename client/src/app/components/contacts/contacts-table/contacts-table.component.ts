@@ -11,7 +11,7 @@ import { DataTableDirective } from 'angular-datatables';
   templateUrl: './contacts-table.component.html',
   styleUrls: ['./contacts-table.component.css']
 })
-export class ContactsTableComponent implements OnInit, AfterViewInit
+export class ContactsTableComponent implements OnInit
 {  
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -54,11 +54,7 @@ export class ContactsTableComponent implements OnInit, AfterViewInit
 
     this.getContacts();
   }
-
-  ngAfterViewInit()
-  {
-    this.dtTrigger.next();
-  }
+  
   rerender(): void 
   {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
