@@ -45,7 +45,7 @@
     <div [ngClass]="{ 'has-success': (form.controls['desc'].valid && form.controls['desc'].dirty), 'has-error': form.controls['desc'].dirty && form.controls['desc'].errors }">
       <input class="form-control" type="text" name="desc" formControlName="desc" placeholder="Description of the contact" autocomplete="off">
       <ul class="help-block">
-        <li *ngIf="form.controls['desc'].dirty && form.controls['desc'].errors?.maxlength">Maximal length is 100</li>
+        <li *ngIf="form.controls['desc'].dirty && form.controls['desc'].errors?.maxlength">Maximal length is 300</li>
       </ul>
     </div>
   </div>

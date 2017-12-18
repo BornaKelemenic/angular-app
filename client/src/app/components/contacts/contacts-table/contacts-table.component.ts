@@ -54,14 +54,14 @@ export class ContactsTableComponent implements OnInit
 
     this.getContacts();
   }
-  
+
   rerender(): void 
   {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
-      this.dtTrigger.next();
+      this.getContacts();
     });
   }
 

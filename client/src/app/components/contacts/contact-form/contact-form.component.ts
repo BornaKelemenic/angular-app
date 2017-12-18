@@ -42,7 +42,7 @@ export class ContactFormComponent implements OnInit
         Validators.maxLength(100),
         this.isEmptyString
       ])],
-      desc: ['', Validators.maxLength(100)],
+      desc: ['', Validators.maxLength(300)],
       city: ['', Validators.maxLength(100)],
       picture: [''],
       mobile_numbers: this.formBuilder.array([ new FormGroup({
