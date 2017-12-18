@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { MessageService } from '../../../services/message.service';
+import { User } from '../../../models/User';
 
 @Component({
   selector: 'app-user-list',
@@ -9,7 +10,7 @@ import { MessageService } from '../../../services/message.service';
 })
 export class UserListComponent implements OnInit
 {
-  users: Array<any>;
+  users: Array<User>;
   
   constructor(
     public authService: AuthService,

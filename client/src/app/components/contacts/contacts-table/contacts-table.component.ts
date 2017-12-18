@@ -3,6 +3,7 @@ import { MessageService } from '../../../services/message.service';
 import { ContactsService } from '../../../services/contacts.service';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
+import { Contact } from '../../../models/Contact';
 
 @Component({
   selector: 'app-contacts-table',
@@ -10,16 +11,13 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./contacts-table.component.css']
 })
 export class ContactsTableComponent implements OnInit
-{
-  contacts;
-  selectedContact;
+{  
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
-  isContactFormEnabled = false;
+  dtTrigger: Subject<any> = new Subject();  
 
   constructor(
     public msgService: MessageService,
-    private contactService: ContactsService
+    public contactService: ContactsService
   )
   {}
 
@@ -35,9 +33,9 @@ export class ContactsTableComponent implements OnInit
         $('td', row).unbind('click');
         $('td', row).bind('click', () => {
           // Click handler
-          if (this.selectedContact)
+          if (this.contactService.selectedContact)
           {
-            if (this.selectedContact._id !== data[0])
+            if (this.contactService.selectedContact._id !== data[0])
             {
               this.rowClick(data);
             }
@@ -69,7 +67,7 @@ export class ContactsTableComponent implements OnInit
       else
       {
         this.msgService.createSuccessMessage(res.msg);
-        this.contacts = res.contacts;       
+        this.contactService.contacts = res.contacts;       
         this.dtTrigger.next();
 
         setTimeout(() => {
@@ -97,7 +95,7 @@ export class ContactsTableComponent implements OnInit
 
   addNewContact()
   {
-    this.isContactFormEnabled = !this.isContactFormEnabled;
+    this.contactService.isContactFormEnabled = !this.contactService.isContactFormEnabled;
   }
 
   rowClick(data)
@@ -111,7 +109,7 @@ export class ContactsTableComponent implements OnInit
       else
       {
         this.msgService.removeInfoMessages();
-        this.selectedContact = res.contact;
+        this.contactService.selectedContact = res.contact;
       }
     });
   }

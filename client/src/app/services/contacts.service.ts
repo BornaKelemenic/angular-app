@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Contact } from '../models/Contact';
 
 @Injectable()
 export class ContactsService
 {
   options;
+  contacts: Array<Contact>;
+  selectedContact: Contact;
+  isContactFormEnabled = false;
 
   constructor(private authService: AuthService, private http: Http)
   {}

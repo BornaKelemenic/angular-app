@@ -55,6 +55,7 @@
     <label for="picture">Picture link:</label>
     <div>
       <input class="form-control" type="text" name="picture" formControlName="picture" placeholder="Link to the picture" autocomplete="off">
+      <img class="preview" *ngIf="form.controls['picture'].value" src="{{ form.controls['picture'].value }}" alt="Could not preview image.">
     </div>
   </div>
 

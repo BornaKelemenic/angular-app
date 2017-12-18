@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray, FormGroupDirective, NgForm } from '@angular/forms';
 import { MessageService } from '../../../services/message.service';
 import { ContactsService } from '../../../services/contacts.service';
+import { Contact } from '../../../models/Contact';
 
 @Component({
   selector: 'app-contact-form',
@@ -45,7 +46,10 @@ export class ContactFormComponent implements OnInit
       city: ['', Validators.maxLength(100)],
       picture: [''],
       mobile_numbers: this.formBuilder.array([ new FormGroup({
-        number: new FormControl('', Validators.required),
+        number: new FormControl('', Validators.compose([
+          Validators.required,
+          Validators.pattern(/[0-9]/g)
+        ])),
         type: new FormControl('', Validators.required),
         desc: new FormControl('')
       })])
@@ -103,6 +107,7 @@ export class ContactFormComponent implements OnInit
       {
         this.msgService.createSuccessMessage(res.msg);
         this.form.reset();
+        this.contactService.isContactFormEnabled = false;
         setTimeout(() => {
           this.msgService.removeInfoMessages();
         }, 2000);

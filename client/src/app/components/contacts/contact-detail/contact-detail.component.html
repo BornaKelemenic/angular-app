@@ -1,25 +1,28 @@
-<mat-card>
-  <mat-card-header>
-    <img matCardAvatar src="{{ contact?.picture }}" (error)="contact.picture = 'https://cdn1.iconfinder.com/data/icons/image-manipulations/100/13-512.png'">
-    <mat-card-title>{{ contact?.name }} {{ contact?.surname}}</mat-card-title>
-    <mat-card-subtitle>{{ contact?.city }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    {{ contact?.desc }}
-  </mat-card-content>
-  <mat-card-actions align="start">
-    <button mat-button color="primary">EDIT</button>
-    <button mat-button color="warn">DELETE</button>
-  </mat-card-actions>
-  <mat-divider></mat-divider>
-  <mat-card-footer>
-    <mat-list *ngIf="!(contact.mobile_numbers.length < 1)">
-      <h3 mat-subheader>Numbers</h3>      
-      <mat-list-item *ngFor="let num of contact?.mobile_numbers">
-        <mat-icon mat-list-icon>smartphone</mat-icon>
-        <h4 mat-line>{{ num.type | uppercase }}</h4>
-        <p mat-line>{{ num.number }} -- {{ num.desc }}</p>        
-      </mat-list-item>
-    </mat-list>
-  </mat-card-footer>
-</mat-card>
+<div class="shadow">
+  <mat-card>
+    <mat-card-header>
+      <img matCardAvatar src="{{ contact?.picture }}" (error)="contact.picture = 'https://cdn1.iconfinder.com/data/icons/image-manipulations/100/13-512.png'">
+      <mat-card-title>{{ contact?.name }} {{ contact?.surname}}</mat-card-title>
+      <mat-card-subtitle>{{ contact?.city }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      {{ contact?.desc }}
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-button color="primary">EDIT</button>
+      <button mat-button color="warn">DELETE</button>
+      <button mat-button color="accent" (click)="contactService.selectedContact = null">CLOSE</button>
+    </mat-card-actions>
+    <mat-divider></mat-divider>
+    <mat-card-footer *ngIf="!(contact.mobile_numbers.length < 1)">
+      <h6 mat-subheader>Numbers</h6>
+      <mat-list>
+        <mat-list-item *ngFor="let num of contact?.mobile_numbers">
+          <mat-icon mat-list-icon>smartphone</mat-icon>
+          <h4 mat-line>{{ num.type | uppercase }}</h4>
+          <p mat-line>{{ num.number }} -- {{ num.desc }}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-footer>
+  </mat-card>
+</div>

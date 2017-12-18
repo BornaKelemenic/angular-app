@@ -1,10 +1,10 @@
-<button class="btn btn-success" *ngIf="!isContactFormEnabled" (click)="addNewContact()">Add new contact</button>
-<button class="btn btn-danger" *ngIf="isContactFormEnabled" (click)="addNewContact()">Cancel</button>
+<button class="btn btn-success" *ngIf="!contactService.isContactFormEnabled" (click)="addNewContact()">Add new contact</button>
+<button class="btn btn-danger" *ngIf="contactService.isContactFormEnabled" (click)="addNewContact()">Cancel</button>
 
 <br>
 <br>
 
-<div *ngIf="isContactFormEnabled">
+<div *ngIf="contactService.isContactFormEnabled">
   <app-contact-form></app-contact-form>
 </div>
 
@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let kontakt of contacts; let i=index">
+    <tr *ngFor="let kontakt of contactService.contacts; let i=index">
       <td hidden>{{ kontakt._id }}</td>
       <td>{{ i+1 }}</td>
       <td>{{ kontakt.name }}</td>
@@ -30,9 +30,4 @@
     </tr>
   </tbody>
 </table>
-
-<br>
-<br>
-
-<button class="btn btn-info" type="button" *ngIf="selectedContact" (click)="this.selectedContact = null">Hide details</button>
-<app-contact-detail *ngIf="selectedContact" [contact]="selectedContact"></app-contact-detail>
+<app-contact-detail *ngIf="contactService.selectedContact" [contact]="contactService.selectedContact"></app-contact-detail>

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+import { User } from '../models/User';
 
 @Injectable()
 export class AuthService 
 {
   domain = 'http://localhost:8080';
   authToken;
-  user;
+  user: User;
   options;
 
   constructor(private http: Http) 
@@ -42,7 +43,7 @@ export class AuthService
     this.authToken = localStorage.getItem('token');
   }
 
-  registerUser(user) // Send user object to the server
+  registerUser(user: User) // Send user object to the server
   {
     return this.http.post(this.domain + '/auth/register', user).map( (res) => res.json() );
   }
@@ -57,7 +58,7 @@ export class AuthService
     return this.http.get(this.domain + '/auth/checkUsername/' + username).map( (res) => res.json() );
   }
 
-  login(user) // Login user
+  login(user: User) // Login user
   {
     return this.http.post(this.domain + '/auth/login', user).map( (res) => res.json() );
   }
@@ -69,7 +70,7 @@ export class AuthService
     localStorage.clear();
   }
 
-  storeUserData(token, user) // Save token and user to browser storage
+  storeUserData(token, user: User) // Save token and user to browser storage
   {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../../../models/User';
 
 @Component({
   selector: 'app-user-list-item',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UserListItemComponent implements OnInit 
 {
-  @Input() user;
+  @Input() user: User;
 
   showHide = false;
 
