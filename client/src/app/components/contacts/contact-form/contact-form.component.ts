@@ -45,8 +45,8 @@ export class ContactFormComponent implements OnInit
       city: ['', Validators.maxLength(100)],
       picture: [''],
       mobile_numbers: this.formBuilder.array([ new FormGroup({
-        number: new FormControl(''),
-        type: new FormControl(''),
+        number: new FormControl('', Validators.required),
+        type: new FormControl('', Validators.required),
         desc: new FormControl('')
       })])
     });

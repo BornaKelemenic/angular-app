@@ -31,7 +31,8 @@
   </tbody>
 </table>
 
-<br><br>
+<br>
+<br>
 
 <button class="btn btn-info" type="button" *ngIf="selectedContact" (click)="this.selectedContact = null">Hide details</button>
 <app-contact-detail *ngIf="selectedContact" [contact]="selectedContact"></app-contact-detail>

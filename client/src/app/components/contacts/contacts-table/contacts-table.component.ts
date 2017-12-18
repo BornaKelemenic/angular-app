@@ -69,7 +69,7 @@ export class ContactsTableComponent implements OnInit
       else
       {
         this.msgService.createSuccessMessage(res.msg);
-        this.contacts = res.contacts;
+        this.contacts = res.contacts;       
         this.dtTrigger.next();
 
         setTimeout(() => {
