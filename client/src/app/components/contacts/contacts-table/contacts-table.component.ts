@@ -55,7 +55,7 @@ export class ContactsTableComponent implements OnInit
     this.getContacts();
   }
 
-  rerender(): void 
+  rerender(): void
   {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first

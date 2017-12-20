@@ -98,5 +98,31 @@ module.exports = (router) =>
         }
     });
 
+    router.delete('/delete/:id', (req, res) => 
+    {
+        if (!req.params.id)
+        {
+            res.json({ success: false, msg: 'ID was not provided.' });
+        }
+        else
+        {
+            Contact.findOneAndRemove({ _id: req.params.id }, (err, contact) => 
+            {
+                if (err)
+                {
+                    res.json({ success: false, msg: err });
+                }
+                else if (!contact)
+                {
+                    res.json({ success: false, msg: 'That contact was not found.' });
+                }
+                else
+                {
+                    res.json({ success: true, msg: 'Success.', cont: contact });
+                }
+            });
+        }
+    });
+
     return router;
 }

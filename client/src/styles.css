@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+a:focus, button:focus
+{
+  outline: 0;
+}
+
 .has-error.form-control,
 .has-error .form-control 
 {

@@ -43,4 +43,15 @@ export class ContactsService
     this.options = this.authService.getAuthHeaders();
     return this.http.get(this.authService.domain + '/contacts/' + id, this.options).map(res => res.json());
   }
+
+
+  /**
+   * Delete a contact by ID
+   * @param id 
+   */
+  deleteContactById(id)
+  {
+    this.options = this.authService.getAuthHeaders();
+    return this.http.delete(this.authService.domain + '/contacts/delete/' + id, this.options).map(res => res.json());
+  }
 }
