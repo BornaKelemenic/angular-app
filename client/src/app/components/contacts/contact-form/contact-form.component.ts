@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormArray, FormGroupDi
 import { MessageService } from '../../../services/message.service';
 import { ContactsService } from '../../../services/contacts.service';
 import { Contact } from '../../../models/Contact';
+import { ContactsTableComponent } from '../contacts-table/contacts-table.component';
 
 @Component({
   selector: 'app-contact-form',
@@ -18,7 +19,8 @@ export class ContactFormComponent implements OnInit
   constructor(
     public msgService: MessageService,
     public contactService: ContactsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private ctable: ContactsTableComponent
   )
   {}
 
@@ -93,7 +95,7 @@ export class ContactFormComponent implements OnInit
       desc: this.form.get('desc').value,
       picture: this.form.get('picture').value,
       mobile_numbers: this.form.get('mobile_numbers').value
-    };    
+    };
 
 
     this.contactService.saveNewContact(newContact).subscribe(res => 
@@ -108,6 +110,7 @@ export class ContactFormComponent implements OnInit
         this.msgService.createSuccessMessage(res.msg);
         this.form.reset();
         this.contactService.isContactFormEnabled = false;
+        this.ctable.rerender();
         setTimeout(() => {
           this.msgService.removeInfoMessages();
         }, 2000);
@@ -119,8 +122,11 @@ export class ContactFormComponent implements OnInit
   addNewNumber()
   {
     (<FormArray>this.form.get('mobile_numbers')).push(new FormGroup({
-      number: new FormControl(''),
-      type: new FormControl(''),
+      number: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern(/[0-9]/g)
+      ])),
+      type: new FormControl('', Validators.required),
       desc: new FormControl('')
     }));
   }

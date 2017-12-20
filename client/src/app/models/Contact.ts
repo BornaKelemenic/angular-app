@@ -8,8 +8,8 @@ export interface Contact
     addedBy?: string;
     mobile_numbers?: [
         {
-            number?: string;
-            type?: string;
+            number: string;
+            type: string;
             desc?: string;
         }
     ];

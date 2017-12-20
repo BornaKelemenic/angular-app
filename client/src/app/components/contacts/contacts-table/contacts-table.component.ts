@@ -16,6 +16,7 @@ export class ContactsTableComponent implements OnInit
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  refreshing = false;
 
   constructor(
     public msgService: MessageService,
@@ -58,10 +59,15 @@ export class ContactsTableComponent implements OnInit
   rerender(): void
   {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      this.refreshing = true;
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
       this.getContacts();
+
+      setTimeout(() => {
+        this.refreshing = false;
+      }, 4000);
     });
   }
 
